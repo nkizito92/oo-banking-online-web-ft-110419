@@ -1,3 +1,4 @@
+require "pry"
 class Transfer
   
   attr_accessor :sender, :receiver, :status, :amount
@@ -9,6 +10,8 @@ class Transfer
   end 
   
   def valid? 
-    self.each {|account| account.balance > 0  }
+    sender_receiver = sender.balance + receiver.balance
+    true if sender_receiver > 0 
+    
   end
 end
