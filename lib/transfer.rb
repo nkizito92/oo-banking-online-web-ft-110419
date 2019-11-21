@@ -10,25 +10,24 @@ class Transfer
   end 
   
   def valid? 
-    sender_receiver = sender.balance + receiver.balance
-    true if sender_receiver > 0
-    receiver.valid?
-    sender.valid?
+    receiver.valid? and sender.valid?
   end
   def execute_transaction
-    # binding.pry
-    sender.balance -= amount if receiver.balance += amount  and self.status = "complete"
-    sender.balance += amount if sender.balance < 950 
-    receiver.balance -= amount if receiver.balance > 1050 
-     if sender.balance <= 50 && self.valid? 
-       self.status == "rejected"
-      'Transaction rejected. Please check your account balance.'
-     end 
+    if sender.balance > amount && self.valid? && self.status == "pending"
+      sender.balance -= amount
+      receiver.balance += amount
+      self.status = "complete"
+    else 
+      self.status = "rejected"
+      "Transaction rejected. Please check your account balance."
+    end 
   end 
   
   def reverse_transfer 
-    sender.balance += amount if receiver.balance -= amount  and self.status = "reversed"
-    sender.balance -= amount if sender.balance < 950 
-    receiver.balance -= amount if receiver.balance < 1050 
+    if status == "complete"
+       @sender.balance += amount
+       @receiver.balance -= amount
+       @status = "reversed"
+    end 
   end 
 end
