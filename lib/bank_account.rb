@@ -9,7 +9,6 @@ class BankAccount
   end
   
   def deposit(money)
-    # binding.pry
     @balance += money
   end 
   
@@ -18,6 +17,9 @@ class BankAccount
   end 
   
   def valid?
+      @balance > 0 and @status == "open" ? true : false
+  end
+  def close_account 
     
   end 
 end
