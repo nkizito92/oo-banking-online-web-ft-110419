@@ -29,6 +29,6 @@ class Transfer
   def reverse_transfer 
     sender.balance += amount if receiver.balance -= amount  and self.status = "reversed"
     sender.balance -= amount if sender.balance < 950 
-    receiver.balance += amount if receiver.balance < 1000 
+    receiver.balance -= amount if receiver.balance < 1050 
   end 
 end
